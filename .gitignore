@@ -1,0 +1,11 @@
+# Old specific demo assets
+Sohar.png
+Sohar2.png
+MANA-LOGO.jpeg
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
