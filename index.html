@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Lead Capture Demo - Bharat Commercial Bank</title>
+    <link rel="icon" type="image/svg+xml" href="bank-icon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+           --primary: #0E387A;
+           --primary-dark: #07224F;
+           --accent: #F59E0B;
+           --accent-dark: #D97706;
+           --blue: #0E387A;
+           --blue-dark: #07224F;
+           --blue-light: #EFF6FF;
+           --gold: #f5f5f5;
+           --gray-50: #fafafa;
+           --gray-100: #f5f5f5;
+           --gray-200: #eeeeee;
+           --gray-300: #e0e0e0;
+           --gray-400: #bdbdbd;
+           --gray-600: #757575;
+           --gray-700: #616161;
+           --gray-900: #212121;
+           --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+           --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+           --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+           --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+        
+        .logo a.brand-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .logo a.brand-text:hover {
+            color: var(--primary-dark);
+        }
+        
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .demo-badge {
+            background-color: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-700);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-badge .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10B981;
+            display: inline-block;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0E387A 0%, #001F4D 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(245, 158, 11, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            max-width: 780px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        /* Form Section */
+        .form-section {
+            background-color: white;
+            border-radius: 16px;
+            padding: 60px 50px;
+            box-shadow: var(--shadow-xl);
+            margin: -50px auto 60px;
+            max-width: 920px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .form-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: -0.01em;
+        }
+        
+        .form-section .subtitle {
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 1rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        .card-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px 28px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--gray-900);
+            font-size: 14px;
+            letter-spacing: 0.01em;
+        }
+
+        .form-group label .required-star {
+            color: #DC2626;
+            font-weight: bold;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+            background-color: white;
+            color: var(--gray-900);
+            font-weight: 400;
+        }
+        
+        .form-group input[type="text"]:hover,
+        .form-group input[type="email"]:hover,
+        .form-group select:hover {
+            border-color: var(--gray-400);
+        }
+        
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(14, 56, 122, 0.12);
+            background-color: white;
+        }
+        
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23757575' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+        
+        /* Full width form groups */
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .form-submit {
+            grid-column: span 2;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 16px 60px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(14, 56, 122, 0.25);
+            letter-spacing: 0.01em;
+            font-family: 'Inter', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 56, 122, 0.35);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Spinner */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Benefits Section */
+        .main-content {
+            padding: 50px 0 70px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title p {
+            color: var(--gray-600);
+            font-size: 1.05rem;
+        }
+        
+        .card-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px 32px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+        
+        .benefit-card .benefit-icon {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--gray-900);
+            letter-spacing: -0.01em;
+        }
+        
+        .benefit-card p {
+            color: var(--gray-600);
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0E387A 0%, #001F4D 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.125rem;
+            font-weight: 600; 
+            margin-bottom: 20px;
+            letter-spacing: 0.01em;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            margin-top: 40px;
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        
+        .footer-bottom p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            padding: 36px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-600);
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .modal-card h3 {
+            font-size: 1.5rem;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .modal-card p, .modal-card li {
+            font-size: 14px;
+            color: var(--gray-700);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .modal-card ul {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .form-section {
+                padding: 40px 24px;
+                margin: -40px 16px 40px;
+            }
+            
+            .form-section h2 {
+                font-size: 1.6rem;
+            }
+            
+            .card-form {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .form-group.full-width,
+            .form-submit {
+                grid-column: span 1;
+            }
+            
+            .card-benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="index.html" class="brand-text">Bharat Commercial Bank</a>
+                </div>
+                <div class="language-toggle">
+                    <div class="demo-badge">
+                        <span class="status-dot"></span>
+                        <span>Digital Lead Onboarding &bull; India</span>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="lang-en">Welcome to Bharat Commercial Bank</h1>
+            <p class="hero-subtext">Experience seamless digital onboarding and financial solutions with fast, paperless verification across India.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="form-section" id="applicationFormSection">
+            <h2 class="lang-en">Apply Today!</h2>
+            <p class="subtitle">Please provide your details below and our team will get in touch with you shortly.</p>
+            
+            <form class="card-form" id="OnLineLeadForm" method="post" action="https://presales1.businessbywire.com/appgold8demo/ProcessAnonymous/OnlineLeadCapture?x=25xgkuqlsapsn67x4pygd2jkrk6m72jvlen6vdzn7tjjah84auerhkhnhralk3brshfc96w9zw737456f3x9un7jmz66gzz2hj2asrx7zjtan8tgg8dq">
+                <input type="hidden" name="debug" value="1"> 
+                <input type="hidden" name="debugEmail" value="demo@bharatbank.co.in"> 
+                <input type="hidden" name="SuccessReturnURL" id="SuccessReturnURL" value="thank-you.html">
+                <input type="hidden" name="FailureReturnURL" id="FailureReturnURL" value="thank-you.html">
+                <input id="ProductName" name="ProductName" type="hidden" class="field" value="Retail Banking">
+                <select id="Layout" name="Layout" style="display: none;">
+                     <option value="102994">Retail Lead Process India</option>
+                </select>
+                <select id="StatusCode" name="StatusCode" style="display: none;">
+                        <option value="100003">New</option>
+                </select>
+                <input type="hidden" id="cust_8239" name="cust_8239" value="Retail Products Campaign India">
+                <input type="hidden" id="cust_8240" name="cust_8240" value="Digital Onboarding">
+
+                <div class="form-group">
+                    <label for="FName" class="lang-en">First Name <span class="required-star">*</span></label>
+                    <input type="text" id="FName" name="FName" placeholder="e.g. Rahul" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="LName" class="lang-en">Last Name <span class="required-star">*</span></label>
+                    <input type="text" id="LName" name="LName" placeholder="e.g. Sharma" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Company" class="lang-en">Company / Organization <span class="required-star">*</span></label>
+                    <input type="text" id="Company" name="Company" placeholder="e.g. Tata Consultancy Services / Self-Employed" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cust_2143" class="lang-en">PAN / Aadhaar Number</label>
+                    <input type="text" id="cust_2143" name="cust_2143" placeholder="e.g. ABCDE1234F / 12-digit Aadhaar">
+                </div>
+                            
+                <div class="form-group">
+                    <label for="Email" class="lang-en">Email Address <span class="required-star">*</span></label>
+                    <input type="email" id="Email" name="Email" placeholder="rahul.sharma@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="MobPhone" class="lang-en">Mobile Number (10 Digits) <span class="required-star">*</span></label>
+                    <input type="text" id="MobPhone" name="MobPhone" placeholder="e.g. 98765 43210" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Address" class="lang-en">Residential Address</label>
+                    <input type="text" id="Address" name="Address" placeholder="e.g. Flat 402, Nariman Point, Mumbai, Maharashtra - 400021">
+                </div>
+
+                <div class="form-group">
+                    <label for="cust_5773" class="lang-en">Annual Income (₹ INR)</label>
+                    <input type="text" name="cust_5773" id="cust_5773" placeholder="e.g. ₹ 12,00,000">
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="Product" class="lang-en">Select Service / Product Category <span class="required-star">*</span></label>
+                    <select name="Product" id="Product" onchange="UpdateProductName();" required>
+                        <option value="1000056" selected>Retail Banking</option>
+                        <option value="1000472">Personal Financing</option>
+                        <option value="1000408">Card Services</option>
+                        <option value="1000406">Savings &amp; Deposits</option>
+                        <option value="1000407">Wealth Management</option>
+                    </select>
+                </div>
+
+                <div class="form-submit">
+                    <button class="btn-primary lang-en" id="submitBtn" name="submit" type="submit">
+                        <span class="spinner" id="btnSpinner"></span>
+                        <span id="btnText">Submit Application</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="main-content" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Bharat Commercial Bank?</h2>
+                <p>Speed, security, and paperless digital convenience across India</p>
+            </div>
+            <div class="card-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Instant Paperless Onboarding</h3>
+                    <p>Applications are received instantly into our CRM with automated deduplication and credit score checks.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏛️</div>
+                    <h3>Pan-India Branch Network</h3>
+                    <p>Dedicated branch Relationship Managers across 5,000+ branches and digital centers nationwide.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>RBI Compliant Security</h3>
+                    <p>Enterprise-grade 256-bit encryption adhering to Reserve Bank of India digital lending guidelines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4 class="lang-en">Customer Helpline</h4>
+                    <ul>
+                        <li><a href="tel:18002009247" class="lang-en">Toll-Free: 1800 200 9247</a></li>
+                        <li><a href="mailto:support@bharatbank.co.in" class="lang-en">Email: support@bharatbank.co.in</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="lang-en">Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" class="lang-en">About Bharat Bank</a></li>
+                        <li><a href="#applicationFormSection" class="lang-en">Apply Online</a></li>
+                        <li><a href="#benefits" class="lang-en">Banking Benefits</a></li>
+                        <li><a href="thank-you.html" class="lang-en">Confirmation Page Demo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="lang-en">Regulatory &amp; Policies</h4>
+                    <ul>
+                        <li><a href="#termsModal" onclick="openModal('termsModal'); return false;" class="lang-en">Terms &amp; Conditions</a></li>
+                        <li><a href="#privacyModal" onclick="openModal('privacyModal'); return false;" class="lang-en">Privacy &amp; DPDP Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Online Lead Capture Demo &bull; Bharat Commercial Bank &bull; Powered by CRMNEXT</p>
+                <p class="lang-en">Disclaimer: This website is strictly for demonstration purposes simulating digital retail banking in India. All submitted information is handled in an isolated demonstration sandbox.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Terms Modal -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal('termsModal')" aria-label="Close modal">&times;</button>
+            <h3>Terms &amp; Conditions</h3>
+            <p>Welcome to Bharat Commercial Bank's Online Lead Capture Demonstration system. By interacting with this demonstration portal, you acknowledge and agree to the following terms:</p>
+            <ul>
+                <li>This portal is a demonstration interface showcasing end-to-end digital customer onboarding powered by CRMNEXT for Indian banking scenarios.</li>
+                <li>No actual credit contracts or financial obligations are initiated through this demonstration.</li>
+                <li>Data submitted is processed within a secure test sandbox and used solely for demonstrating lead capture, deduplication, and automated RM routing capabilities.</li>
+            </ul>
+            <p>For official banking inquiries or real product applications, please visit your nearest branch or contact our toll-free customer helpline at 1800 200 9247.</p>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal('privacyModal')" aria-label="Close modal">&times;</button>
+            <h3>Privacy &amp; Data Protection Policy</h3>
+            <p>Your privacy and data security are our highest priority. This policy outlines our data handling practices for this demonstration environment in accordance with India's Digital Personal Data Protection (DPDP) standards:</p>
+            <ul>
+                <li>Information collected (Name, Email, Mobile, PAN/Aadhaar reference, Company) is utilized exclusively to illustrate the CRM lead deduplication and branch assignment features.</li>
+                <li>No personal data is shared with unauthorized third parties, telemarketers, or external brokers.</li>
+                <li>All sessions and form submissions are protected via standard SSL/TLS encryption.</li>
+            </ul>
+            <p>Inquiries regarding demonstration data handling may be sent to our Data Protection Officer at privacy@bharatbank.co.in.</p>
+        </div>
+    </div>
+
+    <script> 
+        // Sync ProductName with selected dropdown item
+        function UpdateProductName() { 
+            var prodObj = document.getElementById('Product'); 
+            var prodNameObj = document.getElementById('ProductName'); 
+            if (prodObj && prodNameObj && prodObj.selectedIndex >= 0) {
+                prodNameObj.value = prodObj.options[prodObj.selectedIndex].text; 
+            }
+        } 
+
+        // Validate email address format
+        function IsValidEmail(emailVal) { 
+            if (!emailVal || emailVal.trim() === '') return false;
+            var filter = /^(\w+(?:\.\w+)*)@((?:\w+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i; 
+            return filter.test(emailVal.trim()); 
+        }
+
+        // Validate form fields
+        function IsValidForm() { 
+            var fName = document.getElementById('FName').value.trim();
+            var lName = document.getElementById('LName').value.trim();
+            var company = document.getElementById('Company').value.trim();
+            var email = document.getElementById('Email').value.trim();
+            var mobPhone = document.getElementById('MobPhone').value.trim();
+
+            if (!fName) { 
+                alert('Please enter your First Name.'); 
+                document.getElementById('FName').focus();
+                return false; 
+            }
+            if (!lName) { 
+                alert('Please enter your Last Name.'); 
+                document.getElementById('LName').focus();
+                return false; 
+            } 
+            if (!company) { 
+                alert('Please enter your Company / Organization.'); 
+                document.getElementById('Company').focus();
+                return false; 
+            } 
+            if (!email || !IsValidEmail(email)) { 
+                alert('Please enter a valid Email Address.'); 
+                document.getElementById('Email').focus();
+                return false; 
+            } 
+            if (!mobPhone) { 
+                alert('Please enter your Mobile Number.'); 
+                document.getElementById('MobPhone').focus();
+                return false; 
+            } 
+            return true; 
+        } 
+
+        // Modals control
+        function openModal(id) {
+            var modal = document.getElementById(id);
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeModal(id) {
+            var modal = document.getElementById(id);
+            if (modal) modal.classList.remove('active');
+        }
+
+        // Close modal when clicking on overlay background
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', function() {
+            UpdateProductName();
+
+            var form = document.getElementById('OnLineLeadForm');
+            var successInput = document.getElementById('SuccessReturnURL');
+            var failureInput = document.getElementById('FailureReturnURL');
+
+            // Compute target Thank You URL
+            var isHttp = window.location.protocol.startsWith('http');
+            var thankYouUrl = 'thank-you.html';
+            
+            if (isHttp) {
+                try {
+                    thankYouUrl = new URL('thank-you.html', window.location.href).href;
+                } catch(e) {
+                    thankYouUrl = 'thank-you.html';
+                }
+            }
+            
+            if (successInput) successInput.value = thankYouUrl;
+            if (failureInput) failureInput.value = thankYouUrl;
+
+            // Handle submission
+            form.addEventListener('submit', function(e) {
+                if (!IsValidForm()) {
+                    e.preventDefault();
+                    return;
+                }
+
+                UpdateProductName();
+
+                var submitBtn = document.getElementById('submitBtn');
+                var spinner = document.getElementById('btnSpinner');
+                var btnText = document.getElementById('btnText');
+                
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    if (spinner) spinner.style.display = 'inline-block';
+                    if (btnText) btnText.textContent = 'Submitting Application...';
+                }
+
+                // If running locally via file:///, browsers block cross-origin redirects from external HTTPS to file:///.
+                // In that case, we send the lead via fetch() and navigate to thank-you.html directly.
+                if (!isHttp) {
+                    e.preventDefault();
+                    var fNameVal = document.getElementById('FName').value.trim();
+                    var lNameVal = document.getElementById('LName').value.trim();
+                    var fullName = fNameVal + ' ' + lNameVal;
+                    var prodNameVal = document.getElementById('ProductName').value;
+                    var emailVal = document.getElementById('Email').value.trim();
+
+                    var formData = new FormData(form);
+                    var urlParams = new URLSearchParams(formData);
+
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: urlParams,
+                        mode: 'no-cors'
+                    }).then(function() {
+                        window.location.href = 'thank-you.html?Name=' + encodeURIComponent(fullName) + '&Product=' + encodeURIComponent(prodNameVal) + '&Email=' + encodeURIComponent(emailVal);
+                    }).catch(function() {
+                        // Fallback navigation even on network error
+                        window.location.href = 'thank-you.html?Name=' + encodeURIComponent(fullName) + '&Product=' + encodeURIComponent(prodNameVal);
+                    });
+                }
+                // When running on HTTP/HTTPS, form submits natively and CRM endpoint returns HTTP 302 redirecting to thank-you.html!
+            });
+        });
+    </script>
+</body>
+</html>
